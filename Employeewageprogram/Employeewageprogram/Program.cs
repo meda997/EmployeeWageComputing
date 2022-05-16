@@ -4,13 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace EmployeePresentAbsent
 {
     public class Program
     {
         public int EmpPresent = 1;
         public int EmpHr = 8;
+        public int PartTimeEmpHr = 4;
         public int WagesPerHr = 20;
+        public int FullTimeEmp = 1;
         public void CheckEmpPresentAbsent()
         {
             Random check = new Random();
@@ -19,8 +22,19 @@ namespace EmployeePresentAbsent
             if (EmpPresent == CheckEmp)
             {
                 Console.WriteLine("Employee is Present");
-                int DailyWagePerHr = EmpHr * WagesPerHr;
-                Console.WriteLine("Dailywages :" + DailyWagePerHr);
+
+                Random Timecheck = new Random();
+                int CheckTimeEmp = Timecheck.Next(0, 2);
+                if (FullTimeEmp == CheckTimeEmp)
+                {
+                    int DailyWagePerHr = EmpHr * WagesPerHr;
+                    Console.WriteLine("Dailywages :" + DailyWagePerHr);
+                }
+                else
+                {
+                    int DailyWagePerHr1 = PartTimeEmpHr * WagesPerHr;
+                    Console.WriteLine("Dailywages :" + DailyWagePerHr1);
+                }
             }
             else
             {
