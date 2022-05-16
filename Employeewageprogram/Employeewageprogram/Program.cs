@@ -5,36 +5,50 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace EmpPresentAbsent
+{
+    public class EmpWageComputation
     {
-        public class Program
+        public const float WagesPerHr = 20;
+        public const int FullTimeWorkHrsPerDay = 8;
+        public const int PartTimeWorkHoursPerDay = 4;
+        public const int IsFullTime = 2;
+        public const int IsPartTime = 1;
+        public const int IsAbsent = 0;
+        public const int NumWorkDaysPerMonth = 20;
+        public float EmpMontlyWage = 0;
+        float EmpDailyWage = 0;
+
+        public void CalcWage()
         {
-            public int EmpHr = 0;
-            public int WagesPerHr = 20;
-            public const int IsFullTime = 2;
-            public const int IsPartTime = 1;
-            public void EmpWage()
+            int Day = 1;
+            int EmpWorkHrs = 0;
+            while (Day <= NumWorkDaysPerMonth)
             {
                 Random check = new Random();
                 int CheckEmp = check.Next(0, 3);
                 switch (CheckEmp)
                 {
+                    case IsAbsent:
+                        EmpWorkHrs = 0;
+                        break;
                     case IsPartTime:
-                        EmpHr = 4;
+                        EmpWorkHrs = 4;
                         break;
                     case IsFullTime:
-                        EmpHr = 8;
-                        break;
-                    default:
-                        EmpHr = 0;
+                        EmpWorkHrs = 8;
                         break;
                 }
-                int empwage = EmpHr * WagesPerHr;
-                Console.WriteLine("Dailywages :" + empwage);
+                EmpDailyWage = EmpWorkHrs * WagesPerHr;
+
+                EmpMontlyWage += EmpDailyWage;
+                Day++;
             }
-            public static void Main(string[] args)
-            {
-                Program pg = new Program();
-                pg.EmpWage();
-            }
+            Console.WriteLine("Employee Montly Wage :" + EmpMontlyWage);
+        }
+        public static void Main(string[] args)
+        {
+            EmpWageComputation ewc = new EmpWageComputation();
+            ewc.CalcWage();
         }
     }
+}
