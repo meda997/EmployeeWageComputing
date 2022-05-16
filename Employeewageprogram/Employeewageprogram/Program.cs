@@ -4,47 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace EmployeePresentAbsent
-{
-    public class Program
+namespace EmpPresentAbsent
     {
-        public int EmpPresent = 1;
-        public int EmpHr = 8;
-        public int PartTimeEmpHr = 4;
-        public int WagesPerHr = 20;
-        public int FullTimeEmp = 1;
-        public void CheckEmpPresentAbsent()
+        public class Program
         {
-            Random check = new Random();
-            int CheckEmp = check.Next(0, 2);
-
-            if (EmpPresent == CheckEmp)
+            public int EmpHr = 0;
+            public int WagesPerHr = 20;
+            public const int IsFullTime = 2;
+            public const int IsPartTime = 1;
+            public void EmpWage()
             {
-                Console.WriteLine("Employee is Present");
-
-                Random Timecheck = new Random();
-                int CheckTimeEmp = Timecheck.Next(0, 2);
-                if (FullTimeEmp == CheckTimeEmp)
+                Random check = new Random();
+                int CheckEmp = check.Next(0, 3);
+                switch (CheckEmp)
                 {
-                    int DailyWagePerHr = EmpHr * WagesPerHr;
-                    Console.WriteLine("Dailywages :" + DailyWagePerHr);
+                    case IsPartTime:
+                        EmpHr = 4;
+                        break;
+                    case IsFullTime:
+                        EmpHr = 8;
+                        break;
+                    default:
+                        EmpHr = 0;
+                        break;
                 }
-                else
-                {
-                    int DailyWagePerHr1 = PartTimeEmpHr * WagesPerHr;
-                    Console.WriteLine("Dailywages :" + DailyWagePerHr1);
-                }
+                int empwage = EmpHr * WagesPerHr;
+                Console.WriteLine("Dailywages :" + empwage);
             }
-            else
+            public static void Main(string[] args)
             {
-                Console.WriteLine("Employee is Absent");
+                Program pg = new Program();
+                pg.EmpWage();
             }
-        }
-        public static void Main(string[] args)
-        {
-            Program pg = new Program();
-            pg.CheckEmpPresentAbsent();
         }
     }
-}
