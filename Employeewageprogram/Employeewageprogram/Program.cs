@@ -11,18 +11,20 @@ namespace EmpPresentAbsent
         public const float WagesPerHr = 20;
         public const int FullTimeWorkHrsPerDay = 8;
         public const int PartTimeWorkHoursPerDay = 4;
+        public const int MaxWorkHrs = 100;
+        public const int MaxWorkDays = 20;
         public const int IsFullTime = 2;
         public const int IsPartTime = 1;
         public const int IsAbsent = 0;
-        public const int NumWorkDaysPerMonth = 20;
-        public float EmpMontlyWage = 0;
+        public float TotalWage = 0;
         float EmpDailyWage = 0;
 
-        public void CalcWage()
+        public void CalculateWage()
         {
             int Day = 1;
             int EmpWorkHrs = 0;
-            while (Day <= NumWorkDaysPerMonth)
+            int TotalWorkHrs = 0;
+            while (Day <= MaxWorkDays && TotalWorkHrs <= MaxWorkHrs)
             {
                 Random check = new Random();
                 int CheckEmp = check.Next(0, 3);
@@ -40,15 +42,16 @@ namespace EmpPresentAbsent
                 }
                 EmpDailyWage = EmpWorkHrs * WagesPerHr;
 
-                EmpMontlyWage += EmpDailyWage;
+                TotalWage += EmpDailyWage;
                 Day++;
+                TotalWorkHrs += EmpWorkHrs;
             }
-            Console.WriteLine("Employee Montly Wage :" + EmpMontlyWage);
+            Console.WriteLine("Total Working Days :" + (Day - 1) + "\nTotal Working Hrs :" + TotalWorkHrs + "\nTotal Employee Wage :" + TotalWage);
         }
         public static void Main(string[] args)
         {
             EmpWageComputation ewc = new EmpWageComputation();
-            ewc.CalcWage();
+            ewc.CalculateWage();
         }
     }
 }
